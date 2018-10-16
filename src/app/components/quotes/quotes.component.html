@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-sm-3" *ngFor="let quote of quotes">
+    <div class="card" style="background-color: var(--lightGold)">
+      <div class="card-body">
+        <p class="card-text"><i class="fa fa-quote-left" aria-hidden="true"></i> {{quote.quote}}</p>
+        <small class="card-subtitle text-muted float-right">{{quote.author}}</small>
+      </div>
+    </div>
+  </div>
+</div>
