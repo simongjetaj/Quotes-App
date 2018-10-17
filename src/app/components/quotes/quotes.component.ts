@@ -22,7 +22,9 @@ export class QuotesComponent implements OnInit {
   }
 
   addQuote(quote: Quote) {
-    console.log(quote);
+    if(!quote.author) {
+      quote.author = 'Unknown';
+    }
     this.quoteService.newQuote(quote);
     this.showAddQuoteForm = false;
     this.flashMsgService.displayFlashMessage('New quote added successfully!', 'alert alert-success text-center', 4000, '/');
@@ -38,7 +40,7 @@ export class QuotesComponent implements OnInit {
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = `"${quote}" \n\n${author}`;
+    selBox.value = `"${quote}" \n\n(Author: ${author})`;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();

@@ -3,5 +3,5 @@ export interface Quote {
   quote: string;
   author: string;
   category: string;
-  createdAt: string;
+  createdAt: number;
 }
