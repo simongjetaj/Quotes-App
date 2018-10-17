@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-lg-3 col-sm-6 mb-2" *ngFor="let apiQuote of apiQuotes" style="display: flex; flex-wrap: wrap;">
+    <div class="lightGoldBackground card">
+      <div class="card-body">
+        <p class="card-text pb-5"><i class="fa fa-quote-left" aria-hidden="true"></i> {{apiQuote.quote}}</p>
+
+        <small class="card-subtitle float-right text-muted authorPosition">{{apiQuote.author}}</small>
+        <a href="" class="btn text-dark saveBtnPosition lightGrayBackground">Save</a>
+      </div>
+    </div>
+  </div>
+</div>

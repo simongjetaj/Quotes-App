@@ -1,8 +1,9 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { FormsModule } from '@angular/forms';
-import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FormsModule } from "@angular/forms";
+import { FlashMessagesModule } from "angular2-flash-messages";
+import { HttpModule } from "@angular/http";
 
 // Angular Fire imports
 import { AngularFireModule } from "@angular/fire";
@@ -17,10 +18,14 @@ import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { QuotesComponent } from "./components/quotes/quotes.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { AddQuoteComponent } from './components/add-quote/add-quote.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AddQuoteComponent } from "./components/add-quote/add-quote.component";
+import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { ApiQuotesComponent } from "./components/api-quotes/api-quotes.component";
 
-const appRoutes: Routes = [{ path: "", component: DashboardComponent }];
+const appRoutes: Routes = [
+  { path: "", component: DashboardComponent },
+  { path: "api", component: ApiQuotesComponent }
+];
 
 @NgModule({
   declarations: [
@@ -29,16 +34,18 @@ const appRoutes: Routes = [{ path: "", component: DashboardComponent }];
     DashboardComponent,
     NavbarComponent,
     AddQuoteComponent,
-    SidebarComponent
+    SidebarComponent,
+    ApiQuotesComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(firebaseConfig),
     FormsModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    HttpModule
   ],
   providers: [AngularFireDatabase, QuoteService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

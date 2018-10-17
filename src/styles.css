@@ -37,3 +37,15 @@
   /* Vertically center the text there */
   background-color: #f5f5f5;
 }
+
+.copyCardIcon,
+.authorPosition,
+.saveBtnPosition {
+  position: absolute;
+  bottom: 1rem;
+}
+
+.authorPosition {
+  right: 1rem;
+}
+

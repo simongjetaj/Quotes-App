@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 
-import { QuoteService } from "../../services/quote.service";
 import { FlashMsgService } from "../../services/flash-msg.service";
 
 import { Quote } from "../../models/Quote";
@@ -21,10 +20,7 @@ export class AddQuoteComponent implements OnInit {
     createdAt: 0
   };
 
-  constructor(
-    private quoteService: QuoteService,
-    private flashMsgService: FlashMsgService
-  ) {}
+  constructor(private flashMsgService: FlashMsgService) {}
 
   ngOnInit() {}
 
@@ -43,7 +39,7 @@ export class AddQuoteComponent implements OnInit {
         * I wanted to hide the form and this was the way to access the showAddQuoteForm property 
       */
 
-      value.createdAt = -(+new Date()); // firebase needs the date in timestamp so we convert it in a short and a snazzy way
+      value.createdAt = -+new Date(); // firebase needs the date in timestamp so we convert it in a short and a snazzy way
       //console.log(value.createdAt);
       this.quoteAdded.emit(value);
     }
