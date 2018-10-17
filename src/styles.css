@@ -6,3 +6,34 @@
   --lightGold: #fce181;
   --lightGray: #edeae5;
 }
+
+.darkBlueBackground {
+  background-color: var(--darkBlue) !important;
+}
+
+.lightBlueBackground {
+  background-color: var(--lightBlue) !important;
+}
+
+.lightBackground {
+  background-color: var(--light) !important;
+}
+
+.lightGoldBackground {
+  background-color: var(--lightGold) !important;
+}
+
+.lightGrayBackground {
+  background-color: var(--lightGray) !important;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  line-height: 40px;
+  /* Vertically center the text there */
+  background-color: #f5f5f5;
+}

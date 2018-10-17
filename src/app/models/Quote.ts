@@ -1,6 +1,7 @@
 export interface Quote {
-  $key: string;
+  $key?: string;
   quote: string;
   author: string;
   category: string;
+  createdAt: string;
 }

@@ -19,7 +19,7 @@ export class QuoteService {
   quote: Observable<any>;
 
   constructor(public angularFireDatabase: AngularFireDatabase) {
-    this.itemsRef = angularFireDatabase.list("quotes");
+    this.itemsRef = angularFireDatabase.list("quotes", ref => ref.orderByChild('createdAt'));
 
     // Use snapshotChanges().map() to store the key and the other quote data
     this.quotes = this.itemsRef
@@ -33,5 +33,9 @@ export class QuoteService {
 
   getQuotes(): Observable<any> {
     return this.quotes;
+  }
+
+  newQuote(quote: Quote): void {
+    this.itemsRef.push(quote);
   }
 }

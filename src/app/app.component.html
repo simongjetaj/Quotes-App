@@ -1,6 +1,20 @@
 <header class="mb-5">
   <app-navbar></app-navbar>
 </header>
-<main class="container">
+<main class="container-fluid mb-5">
+  <div class="row">
+    <div class="col-sm-6 mx-auto">
+      <flash-messages></flash-messages>
+    </div>
+  </div>
+
   <router-outlet></router-outlet>
 </main>
+
+<footer class="footer">
+  <p class="text-center">
+    <span class="text-muted text-center">Designed &amp; Developed by <strong><a href="https://simongjetaj.github.io/"
+          target="blank" class="text-dark">Simon
+          Gjetaj</a></strong></span>
+  </p>
+</footer>

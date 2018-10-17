@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { QuoteService } from "../../services/quote.service";
+import { FlashMsgService } from "../../services/flash-msg.service";
 import { Quote } from "../../models/Quote";
 
 @Component({
@@ -9,13 +10,40 @@ import { Quote } from "../../models/Quote";
 })
 export class QuotesComponent implements OnInit {
   quotes: Quote[];
+  showAddQuoteForm: boolean = false;
 
-  constructor(public quoteService: QuoteService) {}
+  constructor(public quoteService: QuoteService, public flashMsgService: FlashMsgService) { }
 
   ngOnInit() {
     this.quoteService.getQuotes().subscribe(quotes => {
       this.quotes = quotes;
       // console.log(this.quotes);
     });
+  }
+
+  addQuote(quote: Quote) {
+    console.log(quote);
+    this.quoteService.newQuote(quote);
+    this.showAddQuoteForm = false;
+    this.flashMsgService.displayFlashMessage('New quote added successfully!', 'alert alert-success text-center', 4000, '/');
+  }
+
+  toggleAddQuoteForm() {
+    this.showAddQuoteForm = !this.showAddQuoteForm;
+  }
+
+  copyQuote(quote: string, author: string) {
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = `"${quote}" \n\n${author}`;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    this.flashMsgService.displayFlashMessage('Quote copied successfully!', 'alert alert-success text-center', 2000, '/');
   }
 }

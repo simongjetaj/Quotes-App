@@ -1,9 +1,20 @@
+<div class="text-center mb-3">
+  <button type="button" (click)="toggleAddQuoteForm()" class="btn lightBlueBackground"><i class="fa fa-plus"></i>
+    Add New Quote</button>
+</div>
+
+<app-add-quote (quoteAdded)="addQuote($event)" *ngIf="showAddQuoteForm"></app-add-quote>
+
 <div class="row">
-  <div class="col-sm-3" *ngFor="let quote of quotes">
-    <div class="card" style="background-color: var(--lightGold)">
-      <div class="card-body">
+  <div class="col-lg-3 col-sm-6 mb-2" *ngFor="let quote of quotes" style="display: flex; flex-wrap: wrap;">
+    <div class="lightGoldBackground card">
+      <div class="card-body ">
         <p class="card-text"><i class="fa fa-quote-left" aria-hidden="true"></i> {{quote.quote}}</p>
-        <small class="card-subtitle text-muted float-right">{{quote.author}}</small>
+        <br>
+        <small class="card-subtitle float-right text-muted authorPosition">{{quote.author}}</small>
+
+        <a (click)="copyQuote(quote.quote, quote.author)" class="btn lightBackground copyCardIcon" title="Copy to clipboard"><i
+            class="fa fa-copy"></i></a>
       </div>
     </div>
   </div>

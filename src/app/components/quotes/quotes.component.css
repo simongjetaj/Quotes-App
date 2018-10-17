@@ -1,0 +1,13 @@
+.copyCardIcon,
+.authorPosition {
+  position: absolute;
+  bottom: 1rem;
+}
+
+.copyCardIcon {
+  left: 1rem
+}
+
+.authorPosition {
+  right: 1rem
+}
