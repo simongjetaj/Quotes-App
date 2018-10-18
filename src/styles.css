@@ -52,5 +52,11 @@
 .deleteBtnPosition {
   position: absolute;
   top: -1rem;
-  right: -.8rem;
+  right: -0.8rem;
+  cursor: pointer;
+}
+
+.fa-spinner.spinnerPosition {
+  width: 100%;
+  margin: 5% auto;
 }

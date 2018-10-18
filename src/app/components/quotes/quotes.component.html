@@ -5,16 +5,24 @@
 
 <app-add-quote (quoteAdded)="addQuote($event)" *ngIf="showAddQuoteForm"></app-add-quote>
 
-<div class="row">
-  <div class="col-lg-3 col-sm-6 mb-2" *ngFor="let quote of quotes" style="display: flex; flex-wrap: wrap;">
-    <div class="lightGoldBackground card">
-      <div class="card-body">
-        <p class="card-text pb-5"><i class="fa fa-quote-left" aria-hidden="true"></i> {{quote.quote}}</p>
-        <small class="card-subtitle text-muted authorPosition">{{quote.author}}</small>
+<div *ngIf="quotes; else spinner">
+  <div class="row">
+    <div class="col-lg-3 col-sm-6 mb-2" *ngFor="let quote of quotes" style="display: flex; flex-wrap: wrap;">
+      <div class="lightGoldBackground card">
+        <div class="card-body">
+          <p class="card-text pb-5"><i class="fa fa-quote-left" aria-hidden="true"></i> {{quote.quote}}</p>
+          <small class="card-subtitle text-muted authorPosition">{{quote.author}}</small>
 
-        <a (click)="copyQuote(quote.quote, quote.author)" class="btn lightBackground copyCardIcon" title="Copy to clipboard"><i
-            class="fa fa-copy"></i></a>
+          <a (click)="copyQuote(quote.quote, quote.author)" class="btn lightBackground copyCardIcon" title="Copy to clipboard"><i
+              class="fa fa-copy"></i></a>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #spinner>
+  <i class="
+    fa fa-spinner fa-pulse fa-3x fa-fw spinnerPosition"></i>
+  <span class="sr-only">Loading...</span>
+</ng-template>

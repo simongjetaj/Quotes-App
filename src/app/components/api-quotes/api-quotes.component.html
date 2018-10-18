@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="apiQuotes; else spinner">
   <div class="col-lg-3 col-sm-6 mb-4" *ngFor="let apiQuote of apiQuotes; let i = index;" style="display: flex; flex-wrap: wrap;">
     <div class="lightGoldBackground card" [hidden]="!apiQuote.showApiQuote">
       <div class="
@@ -13,3 +13,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #spinner>
+  <i class="
+      fa fa-spinner fa-pulse fa-3x fa-fw spinnerPosition"></i>
+  <span class="sr-only">Loading...</span>
+</ng-template>
