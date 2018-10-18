@@ -48,4 +48,4 @@ const appRoutes: Routes = [
   providers: [AngularFireDatabase, QuoteService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

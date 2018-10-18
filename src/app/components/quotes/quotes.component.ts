@@ -22,7 +22,7 @@ export class QuotesComponent implements OnInit {
   }
 
   addQuote(quote: Quote) {
-    if(!quote.author) {
+    if (!quote.author) {
       quote.author = 'Unknown';
     }
     this.quoteService.newQuote(quote);

@@ -49,3 +49,8 @@
   right: 1rem;
 }
 
+.deleteBtnPosition {
+  position: absolute;
+  top: -1rem;
+  right: -.8rem;
+}
