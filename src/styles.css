@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  font-family: 'Roboto', sans-serif !important;
+}
+
 :root {
   --darkBlue: #026670;
   --lightBlue: #9fedd7;
