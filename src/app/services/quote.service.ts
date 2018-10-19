@@ -18,7 +18,7 @@ export class QuoteService {
   quotes: Observable<any[]>;
   quote: Observable<any>;
 
-  constructor(public angularFireDatabase: AngularFireDatabase) {
+  constructor(private angularFireDatabase: AngularFireDatabase) {
     this.itemsRef = angularFireDatabase.list("quotes", ref =>
       ref.orderByChild("createdAt")
     );

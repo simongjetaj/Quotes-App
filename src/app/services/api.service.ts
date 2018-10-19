@@ -7,7 +7,7 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class ApiService {
-  constructor(public http: Http) { }
+  constructor(private http: Http) { }
 
   getApiQuotes() {
     return this.http.get("https://talaikis.com/api/quotes/").pipe(

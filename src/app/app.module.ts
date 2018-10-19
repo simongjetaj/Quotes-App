@@ -22,6 +22,8 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { AddQuoteComponent } from "./components/add-quote/add-quote.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { ApiQuotesComponent } from "./components/api-quotes/api-quotes.component";
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const appRoutes: Routes = [
   { path: "", component: DashboardComponent },
@@ -36,7 +38,9 @@ const appRoutes: Routes = [
     NavbarComponent,
     AddQuoteComponent,
     SidebarComponent,
-    ApiQuotesComponent
+    ApiQuotesComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

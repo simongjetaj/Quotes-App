@@ -1,34 +1,30 @@
-<div class="row" class="mt-2 mb-5">
-  <div class="col-md-6 mx-auto">
-    <div class="card lightBackground">
-      <div class="card-body">
-        <h5 class="card-title text-center">Add Quote</h5>
+<div class="card lightBackground mb-5">
+  <div class="card-body">
+    <h5 class="card-title text-center">Add Quote</h5>
 
-        <form novalidate #f="ngForm" (ngSubmit)="onAddQuote(f)">
-          <div class="form-group">
-            <label for="quote">Quote</label>
-            <textarea type="text" [(ngModel)]="quote.quote" id="category" name="quote" #quote="ngModel" minlength="10"
-              required class="form-control" id="quote" rows="3" placeholder="Enter quote"></textarea>
-            <p *ngIf="quote.errors?.required && quote.touched" class="text-danger">Quote is required!</p>
-            <p *ngIf="quote.errors?.minlength && quote.touched" class="text-danger">Quote must be atleast 10
-              characters!</p>
-          </div>
-
-          <div class="form-group">
-            <label for="author">Author</label>
-            <input type="text" [(ngModel)]="quote.author" name="author" id="author" class="form-control" placeholder="Enter author">
-          </div>
-
-          <div class="form-group">
-            <label for="category">Category</label>
-            <input type="text" [(ngModel)]="quote.category" name="category" id="category" #category="ngModel" required
-              class="form-control" placeholder="Enter category">
-            <p *ngIf="category.errors?.required && category.touched" class="text-danger">Category is required!</p>
-          </div>
-
-          <button type="submit" class="btn btn-block text-light darkBlueBackground">Add</button>
-        </form>
+    <form novalidate #f="ngForm" (ngSubmit)="onAddQuote(f)">
+      <div class="form-group">
+        <label for="quote">Quote</label>
+        <textarea type="text" [(ngModel)]="quote.quote" id="category" name="quote" #quote="ngModel" minlength="10"
+          required class="form-control" id="quote" rows="3" placeholder="Enter quote"></textarea>
+        <p *ngIf="quote.errors?.required && quote.touched" class="text-danger">Quote is required!</p>
+        <p *ngIf="quote.errors?.minlength && quote.touched" class="text-danger">Quote must be atleast 10
+          characters!</p>
       </div>
-    </div>
+
+      <div class="form-group">
+        <label for="author">Author</label>
+        <input type="text" [(ngModel)]="quote.author" name="author" id="author" class="form-control" placeholder="Enter author">
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input type="text" [(ngModel)]="quote.category" name="category" id="category" #category="ngModel" required
+          class="form-control" placeholder="Enter category">
+        <p *ngIf="category.errors?.required && category.touched" class="text-danger">Category is required!</p>
+      </div>
+
+      <button type="submit" class="btn btn-block text-light darkBlueBackground">Add</button>
+    </form>
   </div>
 </div>
