@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { faAsterisk, faQuoteLeft, faEyeSlash, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { ApiService } from "../../services/api.service";
 import { QuoteService } from "../../services/quote.service";
@@ -13,6 +14,10 @@ import { Quote } from "../../models/Quote";
 })
 export class ApiQuotesComponent implements OnInit {
   apiQuotes: Quote[];
+  faAsterisk = faAsterisk;
+  faEyeSlash = faEyeSlash;
+  faPlusCircle = faPlusCircle;
+  faQuoteLeft = faQuoteLeft;
 
   constructor(
     private apiService: ApiService,

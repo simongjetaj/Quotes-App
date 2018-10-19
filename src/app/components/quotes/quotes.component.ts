@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { faPlus, faQuoteLeft, faCopy, faAsterisk } from '@fortawesome/free-solid-svg-icons';
+
 import { QuoteService } from "../../services/quote.service";
 import { FlashMsgService } from "../../services/flash-msg.service";
 import { Quote } from "../../models/Quote";
@@ -11,6 +13,10 @@ import { Quote } from "../../models/Quote";
 export class QuotesComponent implements OnInit {
   quotes: Quote[];
   showAddQuoteForm: boolean = false;
+  faPlus = faPlus;
+  faQuoteLeft = faQuoteLeft;
+  faCopy = faCopy;
+  faAsterisk = faAsterisk;
 
   constructor(public quoteService: QuoteService, public flashMsgService: FlashMsgService) { }
 

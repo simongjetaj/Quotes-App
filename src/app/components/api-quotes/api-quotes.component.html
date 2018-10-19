@@ -3,19 +3,23 @@
     <div class="lightGoldBackground card" [hidden]="!apiQuote.showApiQuote">
       <div class="
       card-body">
-        <p class="card-text pb-5"><i class="fa fa-quote-left" aria-hidden="true"></i> {{apiQuote.quote}}</p>
+        <p class="card-text pb-5">
+          <fa-icon [icon]="faQuoteLeft"></fa-icon> {{apiQuote.quote}}
+        </p>
 
-        <a (click)='hideApiQuote(apiQuote)' class="deleteBtnPosition" title="Hide Api Quote"><i class="fa fa-2x fa-times-circle-o"
-            aria-hidden="true"></i></a>
+        <a (click)='hideApiQuote(apiQuote)' class="deleteBtnPosition" title="Hide Api Quote">
+          <fa-icon [icon]="faEyeSlash"></fa-icon>
+        </a>
         <small class="card-subtitle text-muted authorPosition">{{apiQuote.author}}</small>
-        <button type="button" (click)="addApiQuote(apiQuote)" class="btn text-dark saveBtnPosition lightGrayBackground">Save</button>
+        <button type="button" (click)="addApiQuote(apiQuote)" class="btn text-dark saveBtnPosition">
+          <fa-icon [icon]="faPlusCircle"></fa-icon> Save
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <ng-template #spinner>
-  <i class="
-      fa fa-spinner fa-pulse fa-3x fa-fw spinnerPosition"></i>
+  <fa-icon [icon]="faAsterisk" [pulse]="true" size="3x" class="spinnerPosition"></fa-icon>
   <span class="sr-only">Loading...</span>
 </ng-template>

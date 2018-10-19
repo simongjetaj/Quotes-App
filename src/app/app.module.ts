@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { FlashMessagesModule } from "angular2-flash-messages";
 import { HttpModule } from "@angular/http";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Angular Fire imports
 import { AngularFireModule } from "@angular/fire";
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     FormsModule,
     FlashMessagesModule.forRoot(),
-    HttpModule
+    HttpModule,
+    FontAwesomeModule
   ],
   providers: [AngularFireDatabase, QuoteService],
   bootstrap: [AppComponent]
