@@ -41,24 +41,6 @@ export class QuoteService {
     this.itemsRef.push(quote);
   }
 
-  // filterQuotes(searchedText) {
-  //   if (!searchedText) {
-  //     return this.quotes;
-  //   } else {
-  //     this.itemsRef = this.angularFireDatabase.list("quotes", ref =>
-  //       ref.orderByChild("cat").equalTo(searchedText)
-  //     );
-
-  //     return this.filteredQuotes = this.itemsRef
-  //       .snapshotChanges()
-  //       .pipe(
-  //         map(changes =>
-  //           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-  //         )
-  //       );
-  //   }
-  // }
-
   filterQuotes(category) {
     if (category === "all") {
       return this.quotes;

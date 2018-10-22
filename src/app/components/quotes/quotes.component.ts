@@ -35,7 +35,6 @@ export class QuotesComponent implements OnInit {
     this.quoteService.getQuotes().subscribe(quotes => {
       this.quotes = quotes;
       this.filteredQuotes = this.quotes;
-      // console.log(this.quotes);
     });
   }
 
@@ -85,11 +84,6 @@ export class QuotesComponent implements OnInit {
         q.quote.toLowerCase().indexOf(searchedText) > -1 ||
         q.author.toLowerCase().indexOf(searchedText) > -1
     );
-
-    // this.quoteService.filterQuotes(searchedText).subscribe(quotes => {
-    //   this.filteredQuotes = quotes;
-    //   console.log(this.filteredQuotes);
-    // });
   }
 
   changeCategory(cat) {
