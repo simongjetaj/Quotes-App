@@ -1,3 +1,6 @@
-<p>
-  sidebar works!
-</p>
+<h6 class="text-center text-muted">Categories</h6>
+<button type="button" class="btn text-light darkBlueBackground mb-2" (click)="changeCategory('all')" style="width: 100%">All</button>
+
+<div class="btn-group-vertical d-block" *ngFor="let category of categories">
+  <button type="button" class="btn text-light darkBlueBackground mb-2" (click)="changeCategory(category)">{{category}}</button>
+</div>

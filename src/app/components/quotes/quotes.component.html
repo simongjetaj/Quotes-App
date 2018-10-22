@@ -1,39 +1,48 @@
 <div class="row">
-  <div class="col-sm-4 mb-2">
-    <input type="search" #text id="text" (input)="filterQuotes(text.value)" class="form-control" placeholder="Search by quote or author...">
+  <div></div>
+  <div class="col-sm-2">
+    <app-sidebar *ngIf="quotes" [quotes]="quotes" (categoryChanged)="changeCategory($event)"></app-sidebar>
   </div>
-  <div class="col-sm-8">
-    <div class="text-center mb-3">
-      <button type="button" (click)="toggleAddQuoteForm()" class="btn lightBlueBackground">
-        <fa-icon [icon]="faPlus"></fa-icon>
-        Add New Quote
-      </button>
+
+  <div class="col-sm-10">
+    <div class="row">
+      <div class="col-sm-4 mb-2">
+        <input type="search" #text id="text" (input)="filterQuotes(text.value)" class="form-control" placeholder="Search by quote or author...">
+      </div>
+      <div class="col-sm-8">
+        <div class="text-center mb-3">
+          <button type="button" (click)="toggleAddQuoteForm()" class="btn lightBlueBackground">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            Add New Quote
+          </button>
+        </div>
+
+        <app-add-quote (quoteAdded)="addQuote($event)" *ngIf="showAddQuoteForm"></app-add-quote>
+      </div>
     </div>
 
-    <app-add-quote (quoteAdded)="addQuote($event)" *ngIf="showAddQuoteForm"></app-add-quote>
-  </div>
-</div>
+    <div *ngIf="quotes; else spinner">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6 mb-2" *ngFor="let quote of filteredQuotes" style="display: flex; flex-wrap: wrap;">
+          <div class="lightGoldBackground card">
+            <div class="card-body">
+              <p class="card-text pb-5">
+                <fa-icon [icon]="faQuoteLeft"></fa-icon> {{quote.quote}}
+              </p>
+              <small class="card-subtitle text-muted authorPosition">{{quote.author}}</small>
 
-<div *ngIf="quotes; else spinner">
-  <div class="row">
-    <div class="col-lg-3 col-sm-6 mb-2" *ngFor="let quote of filteredQuotes" style="display: flex; flex-wrap: wrap;">
-      <div class="lightGoldBackground card">
-        <div class="card-body">
-          <p class="card-text pb-5">
-            <fa-icon [icon]="faQuoteLeft"></fa-icon> {{quote.quote}}
-          </p>
-          <small class="card-subtitle text-muted authorPosition">{{quote.author}}</small>
-
-          <a (click)="copyQuote(quote.quote, quote.author)" class="btn lightBackground copyCardIcon" title="Copy to clipboard">
-            <fa-icon [icon]="faCopy"></fa-icon>
-          </a>
+              <a (click)="copyQuote(quote.quote, quote.author)" class="btn lightBackground copyCardIcon" title="Copy to clipboard">
+                <fa-icon [icon]="faCopy"></fa-icon>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <ng-template #spinner>
+      <fa-icon [icon]="faAsterisk" [pulse]="true" size="3x" class="spinnerPosition"></fa-icon>
+      <span class="sr-only">Loading...</span>
+    </ng-template>
   </div>
 </div>
-
-<ng-template #spinner>
-  <fa-icon [icon]="faAsterisk" [pulse]="true" size="3x" class="spinnerPosition"></fa-icon>
-  <span class="sr-only">Loading...</span>
-</ng-template>

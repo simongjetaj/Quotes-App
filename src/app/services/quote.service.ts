@@ -16,13 +16,13 @@ export class QuoteService {
   itemsRef: AngularFireList<any>;
   itemRef: AngularFireObject<any>;
   quotes: Observable<any[]>;
+  filteredQuotes: Observable<any[]>;
   quote: Observable<any>;
 
   constructor(private angularFireDatabase: AngularFireDatabase) {
     this.itemsRef = angularFireDatabase.list("quotes", ref =>
       ref.orderByChild("createdAt")
     );
-
     // Use snapshotChanges().map() to store the key and the other quote data
     this.quotes = this.itemsRef
       .snapshotChanges()
@@ -40,4 +40,41 @@ export class QuoteService {
   newQuote(quote: Quote): void {
     this.itemsRef.push(quote);
   }
+
+  // filterQuotes(searchedText) {
+  //   if (!searchedText) {
+  //     return this.quotes;
+  //   } else {
+  //     this.itemsRef = this.angularFireDatabase.list("quotes", ref =>
+  //       ref.orderByChild("cat").equalTo(searchedText)
+  //     );
+
+  //     return this.filteredQuotes = this.itemsRef
+  //       .snapshotChanges()
+  //       .pipe(
+  //         map(changes =>
+  //           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+  //         )
+  //       );
+  //   }
+  // }
+
+  filterQuotes(category) {
+    if (category === "all") {
+      return this.quotes;
+    } else {
+      this.itemsRef = this.angularFireDatabase.list("quotes", ref =>
+        ref.orderByChild("cat").equalTo(category)
+      );
+
+      return this.filteredQuotes = this.itemsRef
+        .snapshotChanges()
+        .pipe(
+          map(changes =>
+            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+          )
+        );
+    }
+  }
+
 }

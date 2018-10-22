@@ -16,7 +16,7 @@ export class AddQuoteComponent implements OnInit {
   quote: Quote = {
     quote: "",
     author: "",
-    category: "",
+    cat: "",
     createdAt: 0
   };
 

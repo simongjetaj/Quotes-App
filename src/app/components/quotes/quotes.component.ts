@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import {
   faPlus,
   faQuoteLeft,
@@ -17,17 +17,19 @@ import { Quote } from "../../models/Quote";
 })
 export class QuotesComponent implements OnInit {
   quotes: Quote[];
+  filteredQuotes: Quote[];
   showAddQuoteForm: boolean = false;
+
   faPlus = faPlus;
   faQuoteLeft = faQuoteLeft;
   faCopy = faCopy;
   faAsterisk = faAsterisk;
-  filteredQuotes: Quote[];
+
 
   constructor(
     private quoteService: QuoteService,
     private flashMsgService: FlashMsgService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.quoteService.getQuotes().subscribe(quotes => {
@@ -83,5 +85,19 @@ export class QuotesComponent implements OnInit {
         q.quote.toLowerCase().indexOf(searchedText) > -1 ||
         q.author.toLowerCase().indexOf(searchedText) > -1
     );
+
+    // this.quoteService.filterQuotes(searchedText).subscribe(quotes => {
+    //   this.filteredQuotes = quotes;
+    //   console.log(this.filteredQuotes);
+    // });
+  }
+
+  changeCategory(cat) {
+    // console.log(cat);
+    cat = cat.toLowerCase().trim();
+    this.quoteService.filterQuotes(cat).subscribe(quotes => {
+      this.filteredQuotes = quotes;
+    });
+
   }
 }

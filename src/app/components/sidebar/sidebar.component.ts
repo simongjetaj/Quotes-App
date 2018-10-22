@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Quote } from "../../models/Quote";
 
 @Component({
   selector: 'app-sidebar',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  @Input() quotes: Quote[];
+  categories: string[];
+  @Output()
+  categoryChanged = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {
+    //[...new Set(array.map(item => item.age))];
+    this.categories = this.quotes.map(item => item.cat)
+      .filter((value, index, self) => self.indexOf(value) === index)
   }
 
+  changeCategory(category: string) {
+    this.categoryChanged.emit(category);
+  }
 }

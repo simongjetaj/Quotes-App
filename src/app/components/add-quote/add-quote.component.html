@@ -18,10 +18,10 @@
       </div>
 
       <div class="form-group">
-        <label for="category">Category</label>
-        <input type="text" [(ngModel)]="quote.category" name="category" id="category" #category="ngModel" required
-          class="form-control" placeholder="Enter category">
-        <p *ngIf="category.errors?.required && category.touched" class="text-danger">Category is required!</p>
+        <label for="cat">Category</label>
+        <input type="text" [(ngModel)]="quote.cat" name="cat" id="cat" #cat="ngModel" required class="form-control"
+          placeholder="Enter category">
+        <p *ngIf="cat.errors?.required && cat.touched" class="text-danger">Category is required!</p>
       </div>
 
       <button type="submit" class="btn btn-block text-light darkBlueBackground">Add</button>

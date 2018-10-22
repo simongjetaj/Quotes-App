@@ -16,17 +16,14 @@ import { QuoteService } from "./services/quote.service";
 
 // Component imports
 import { AppComponent } from "./app.component";
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { QuotesComponent } from "./components/quotes/quotes.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { AddQuoteComponent } from "./components/add-quote/add-quote.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { ApiQuotesComponent } from "./components/api-quotes/api-quotes.component";
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 
 const appRoutes: Routes = [
-  { path: "", component: DashboardComponent },
+  { path: "", component: QuotesComponent },
   { path: "api", component: ApiQuotesComponent }
 ];
 
@@ -34,13 +31,10 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     QuotesComponent,
-    DashboardComponent,
     NavbarComponent,
     AddQuoteComponent,
     SidebarComponent,
-    ApiQuotesComponent,
-    LoginComponent,
-    RegisterComponent
+    ApiQuotesComponent
   ],
   imports: [
     BrowserModule,
