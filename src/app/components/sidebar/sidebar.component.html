@@ -1,6 +1,7 @@
 <h6 class="text-center text-muted">Categories</h6>
-<button type="button" class="btn text-light darkBlueBackground mb-2" (click)="changeCategory('all')" style="width: 100%">All</button>
+<button type="button" class="btn text-white darkBlueBackground mb-2 lightest" (click)="changeCategory('all')" style="width: 100%">All</button>
 
 <div class="btn-group-vertical d-block" *ngFor="let category of categories">
-  <button type="button" class="btn text-light darkBlueBackground mb-2" (click)="changeCategory(category)">{{category}}</button>
+  <button type="button" class="btn text-light darkBlueBackground mb-2 lighter" (click)="changeCategory(category)">{{category
+    | titlecase}}</button>
 </div>

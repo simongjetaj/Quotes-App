@@ -68,3 +68,11 @@ body {
   justify-content: center;
   margin-top: 10%;
 }
+
+.lighter {
+  opacity: 0.88;
+}
+
+.lightest {
+  opacity: 0.65;
+}

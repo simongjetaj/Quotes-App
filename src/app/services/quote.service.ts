@@ -59,4 +59,8 @@ export class QuoteService {
     }
   }
 
+  // add(a, b) {
+  //   return a + b;
+  // }
+
 }

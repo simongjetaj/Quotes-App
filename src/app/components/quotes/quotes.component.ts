@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+
 import {
   faPlus,
   faQuoteLeft,
@@ -35,7 +36,12 @@ export class QuotesComponent implements OnInit {
     this.quoteService.getQuotes().subscribe(quotes => {
       this.quotes = quotes;
       this.filteredQuotes = this.quotes;
-    });
+    }, err => this.flashMsgService.displayFlashMessage(
+      `${err}`,
+      "alert alert-danger text-danger",
+      4000,
+      "/"
+    ));
   }
 
   addQuote(quote: Quote) {
@@ -87,11 +93,8 @@ export class QuotesComponent implements OnInit {
   }
 
   changeCategory(cat) {
-    // console.log(cat);
-    cat = cat.toLowerCase().trim();
     this.quoteService.filterQuotes(cat).subscribe(quotes => {
       this.filteredQuotes = quotes;
     });
-
   }
 }

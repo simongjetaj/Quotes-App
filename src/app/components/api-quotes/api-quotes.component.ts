@@ -29,8 +29,12 @@ export class ApiQuotesComponent implements OnInit {
     this.apiService.getApiQuotes().subscribe(apiQuotes => {
       apiQuotes.map(q => q.showApiQuote = true)
       this.apiQuotes = apiQuotes;
-      // console.log(this.apiQuotes);
-    });
+    }, err => this.flashMsgService.displayFlashMessage(
+      `${err}`,
+      "alert alert-danger text-danger",
+      4000,
+      "/"
+    ));
   }
 
   addApiQuote(quote: Quote) {

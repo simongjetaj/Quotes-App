@@ -13,10 +13,11 @@ export class SidebarComponent implements OnInit {
   @Output()
   categoryChanged = new EventEmitter<string>();
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.categories = Array.from(new Set(this.quotes.map(c => c.cat)));
+
     // this.categories = this.quotes.map(item => item.cat)
     //   .filter((value, index, self) => self.indexOf(value) === index)
   }

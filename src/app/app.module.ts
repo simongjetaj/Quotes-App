@@ -9,7 +9,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // Angular Fire imports
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabase } from "@angular/fire/database";
-import { firebaseConfig } from "../environment";
+import { firebaseConfig } from "../environments/firebase.config";
 
 // Service imports
 import { QuoteService } from "./services/quote.service";
