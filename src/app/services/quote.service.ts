@@ -59,8 +59,7 @@ export class QuoteService {
     }
   }
 
-  // add(a, b) {
-  //   return a + b;
-  // }
-
+  deleteQuote(quoteId: string) {
+    this.itemsRef.remove(quoteId);
+  }
 }

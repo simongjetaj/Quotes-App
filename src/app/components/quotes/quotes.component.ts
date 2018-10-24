@@ -4,7 +4,8 @@ import {
   faPlus,
   faQuoteLeft,
   faCopy,
-  faAsterisk
+  faAsterisk,
+  faTimesCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 import { QuoteService } from "../../services/quote.service";
@@ -25,7 +26,7 @@ export class QuotesComponent implements OnInit {
   faQuoteLeft = faQuoteLeft;
   faCopy = faCopy;
   faAsterisk = faAsterisk;
-
+  faTimesCircle = faTimesCircle;
 
   constructor(
     private quoteService: QuoteService,
@@ -52,6 +53,16 @@ export class QuotesComponent implements OnInit {
     this.showAddQuoteForm = false;
     this.flashMsgService.displayFlashMessage(
       "New quote added successfully!",
+      "alert alert-success text-center",
+      4000,
+      "/"
+    );
+  }
+
+  deleteQuote(quoteId: string) {
+    this.quoteService.deleteQuote(quoteId);
+    this.flashMsgService.displayFlashMessage(
+      "Quote deleted successfully!",
       "alert alert-success text-center",
       4000,
       "/"

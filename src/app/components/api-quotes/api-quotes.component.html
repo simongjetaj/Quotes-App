@@ -1,3 +1,6 @@
+<h6 class="text-center d-none d-lg-block text-muted mb-5 apiQuoteHeader">An extensive collection of random
+  quotes</h6>
+
 <div class="row" *ngIf="apiQuotes; else spinner">
   <div class="col-lg-3 col-sm-6 mb-4" *ngFor="let apiQuote of apiQuotes; let i = index;" style="display: flex; flex-wrap: wrap;">
     <div class="lightGoldBackground card" [hidden]="!apiQuote.showApiQuote">

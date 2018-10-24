@@ -1,12 +1,10 @@
 <div class="card lightBackground mb-5">
   <div class="card-body">
-    <h5 class="card-title text-center">Add Quote</h5>
-
     <form novalidate #f="ngForm" (ngSubmit)="onAddQuote(f)">
       <div class="form-group">
         <label for="quote">Quote <span class="text-danger">*</span></label>
         <textarea type="text" [(ngModel)]="quote.quote" id="category" name="quote" #quote="ngModel" minlength="10"
-          required class="form-control" id="quote" rows="3" placeholder="Enter quote"></textarea>
+          required class="form-control" id="quote" rows="3" placeholder="Enter quote" autofocus></textarea>
         <p *ngIf="quote.errors?.required && quote.touched" class="text-danger">Quote is required!</p>
         <p *ngIf="quote.errors?.minlength && quote.touched" class="text-danger">Quote must be atleast 10
           characters!</p>
@@ -24,7 +22,7 @@
         <p *ngIf="cat.errors?.required && cat.touched" class="text-danger">Category is required!</p>
       </div>
 
-      <button type="submit" class="btn btn-block text-light darkBlueBackground">Add</button>
+      <button type="submit" class="btn text-light d-flex justify-content-center addBtn darkBlueBackground">Add Quote</button>
     </form>
   </div>
 </div>

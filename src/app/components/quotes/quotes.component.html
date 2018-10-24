@@ -22,14 +22,17 @@
 
     <div *ngIf="quotes; else spinner">
       <div class="row">
-        <div class="col-lg-3 col-sm-6 mb-2" *ngFor="let quote of filteredQuotes" style="display: flex; flex-wrap: wrap;">
+        <div class="col-lg-3 col-sm-6 mb-3 quotes" *ngFor="let quote of filteredQuotes">
           <div class="lightGoldBackground card">
             <div class="card-body">
               <p class="card-text pb-5">
                 <fa-icon [icon]="faQuoteLeft"></fa-icon> {{quote.quote}}
               </p>
-              <small class="card-subtitle text-muted authorPosition">{{quote.author}}</small>
+              <small class="card-subtitle text-muted authorPosition">&mdash; {{quote.author}}</small>
 
+              <a (click)='deleteQuote(quote.key)' class="deleteBtnPosition" title="Delete Quote">
+                <fa-icon [icon]="faTimesCircle"></fa-icon>
+              </a>
               <a (click)="copyQuote(quote.quote, quote.author)" class="btn lightBackground copyCardIcon" title="Copy to clipboard">
                 <fa-icon [icon]="faCopy"></fa-icon>
               </a>
