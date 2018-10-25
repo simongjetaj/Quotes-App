@@ -61,6 +61,13 @@ body {
   cursor: pointer;
 }
 
+.deleteBtnPosition:hover {
+  /* font-size: 1.25rem; */
+  transform: scale(1.3);
+  transition: all 0.09s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+}
+
 .spinnerPosition {
   display: flex;
   justify-content: center;
