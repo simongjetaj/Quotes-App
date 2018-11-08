@@ -5,7 +5,8 @@ import {
   faQuoteLeft,
   faCopy,
   faAsterisk,
-  faTimesCircle
+  faTimesCircle,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
 import { QuoteService } from "../../services/quote.service";
@@ -19,7 +20,6 @@ import { Quote } from "../../models/Quote";
 })
 export class QuotesComponent implements OnInit {
   quotes: Quote[];
-  filteredQuotes: Quote[];
   showAddQuoteForm: boolean = false;
 
   faPlus = faPlus;
@@ -27,22 +27,26 @@ export class QuotesComponent implements OnInit {
   faCopy = faCopy;
   faAsterisk = faAsterisk;
   faTimesCircle = faTimesCircle;
+  faSearch = faSearch;
 
   constructor(
     private quoteService: QuoteService,
     private flashMsgService: FlashMsgService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.quoteService.getQuotes().subscribe(quotes => {
-      this.quotes = quotes;
-      this.filteredQuotes = this.quotes;
-    }, err => this.flashMsgService.displayFlashMessage(
-      `${err}`,
-      "alert alert-danger text-danger",
-      4000,
-      "/"
-    ));
+    this.quoteService
+      .getQuotes()
+      .subscribe(
+        quotes => (this.quotes = quotes),
+        err =>
+          this.flashMsgService.displayFlashMessage(
+            `${err}`,
+            "alert alert-danger text-danger",
+            4000,
+            "/"
+          )
+      );
   }
 
   addQuote(quote: Quote) {
@@ -51,22 +55,10 @@ export class QuotesComponent implements OnInit {
     }
     this.quoteService.newQuote(quote);
     this.showAddQuoteForm = false;
-    this.flashMsgService.displayFlashMessage(
-      "New quote added successfully!",
-      "alert alert-success text-center",
-      4000,
-      "/"
-    );
   }
 
   deleteQuote(quoteId: string) {
     this.quoteService.deleteQuote(quoteId);
-    this.flashMsgService.displayFlashMessage(
-      "Quote deleted successfully!",
-      "alert alert-success text-center",
-      4000,
-      "/"
-    );
   }
 
   toggleAddQuoteForm() {
@@ -96,16 +88,20 @@ export class QuotesComponent implements OnInit {
   filterQuotes(searchedText: string) {
     searchedText = searchedText.toLowerCase().trim();
 
-    this.filteredQuotes = this.quotes.filter(
-      (q: Quote) =>
-        q.quote.toLowerCase().indexOf(searchedText) > -1 ||
-        q.author.toLowerCase().indexOf(searchedText) > -1
-    );
+    if (!searchedText) {
+      this.changeCategory("all");
+    } else {
+      this.quotes = this.quotes.filter(
+        (q: Quote) =>
+          q.quote.toLowerCase().includes(searchedText) ||
+          q.author.toLowerCase().includes(searchedText)
+      );
+    }
   }
 
   changeCategory(cat) {
-    this.quoteService.filterQuotes(cat).subscribe(quotes => {
-      this.filteredQuotes = quotes;
-    });
+    this.quoteService
+      .getQuotesByCategory(cat)
+      .subscribe(quotes => (this.quotes = quotes));
   }
 }

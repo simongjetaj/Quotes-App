@@ -5,8 +5,12 @@
 
   <div class="col-lg-10">
     <div class="row mb-3">
-      <div class="col-sm-5 mb-2">
-        <input type="search" #text id="text" (input)="filterQuotes(text.value)" class="form-control" placeholder="Search by quote or author...">
+      <div class="col-sm-5">
+        <div class="form-group has-search">
+          <fa-icon [icon]="faSearch" class="form-control-feedback"></fa-icon>
+          <input type="search" #text id="text" (input)="filterQuotes(text.value)" class="form-control" placeholder="Search by quote or author..."
+            autofocus>
+        </div>
       </div>
       <div class="col-sm-7">
         <div class="text-center">
@@ -22,7 +26,7 @@
 
     <div *ngIf="quotes; else spinner">
       <div class="row">
-        <div class="col-lg-3 col-sm-6 mb-3 quotes" *ngFor="let quote of filteredQuotes">
+        <div class="col-lg-3 col-sm-6 mb-3 quotes" *ngFor="let quote of quotes">
           <div class="lightGoldBackground card">
             <div class="card-body">
               <p class="card-text pb-5">
@@ -30,7 +34,7 @@
               </p>
               <small class="card-subtitle text-muted authorPosition">&mdash; {{quote.author}}</small>
 
-              <a (click)='deleteQuote(quote.key)' class="deleteBtnPosition" title="Delete Quote">
+              <a (click)='deleteQuote(quote.id)' class="deleteBtnPosition" title="Delete Quote">
                 <fa-icon [icon]="faTimesCircle"></fa-icon>
               </a>
               <a (click)="copyQuote(quote.quote, quote.author)" class="btn lightBackground copyCardIcon" title="Copy to clipboard">

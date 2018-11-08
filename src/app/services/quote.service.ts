@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import {
-  AngularFireDatabase,
-  AngularFireList,
-  AngularFireObject
-} from "@angular/fire/database";
+  AngularFirestore,
+  AngularFirestoreCollection
+} from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+
+import { FlashMsgService } from "./flash-msg.service";
 
 import { Quote } from "../models/Quote";
 
@@ -13,53 +14,92 @@ import { Quote } from "../models/Quote";
   providedIn: "root"
 })
 export class QuoteService {
-  itemsRef: AngularFireList<any>;
-  itemRef: AngularFireObject<any>;
-  quotes: Observable<any[]>;
-  filteredQuotes: Observable<any[]>;
-  quote: Observable<any>;
-
-  constructor(private angularFireDatabase: AngularFireDatabase) {
-    this.itemsRef = angularFireDatabase.list("quotes", ref =>
-      ref.orderByChild("createdAt")
+  private quotesCollection: AngularFirestoreCollection<Quote>;
+  quotes: Observable<Quote[]>;
+  constructor(
+    private readonly afs: AngularFirestore,
+    private readonly flashMsgService: FlashMsgService
+  ) {
+    this.quotesCollection = afs.collection<Quote>("quotes", ref =>
+      ref.orderBy("createdAt", "desc")
     );
-    // Use snapshotChanges().map() to store the key and the other quote data
-    this.quotes = this.itemsRef
-      .snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+    this.quotes = this.getData();
+  }
+
+  getQuotes() {
+    return this.quotes;
+  }
+
+  newQuote(quote: Quote) {
+    this.quotesCollection
+      .add(quote)
+      .then(() =>
+        this.flashMsgService.displayFlashMessage(
+          "New quote added successfully!",
+          "alert alert-success text-center",
+          3000,
+          "/"
+        )
+      )
+      .catch(err =>
+        this.flashMsgService.displayFlashMessage(
+          err,
+          "alert alert-danger text-center",
+          3000,
+          "/"
         )
       );
   }
 
-  getQuotes(): Observable<any> {
-    return this.quotes;
-  }
-
-  newQuote(quote: Quote): void {
-    this.itemsRef.push(quote);
-  }
-
-  filterQuotes(category) {
-    if (category === "all") {
-      return this.quotes;
-    } else {
-      this.itemsRef = this.angularFireDatabase.list("quotes", ref =>
-        ref.orderByChild("cat").equalTo(category)
+  deleteQuote(quoteId: string) {
+    this.quotesCollection
+      .doc(quoteId)
+      .delete()
+      .then(() =>
+        this.flashMsgService.displayFlashMessage(
+          "Quote deleted successfully!",
+          "alert alert-success text-center",
+          2000,
+          "/"
+        )
+      )
+      .catch(err =>
+        this.flashMsgService.displayFlashMessage(
+          err,
+          "alert alert-danger text-center",
+          3000,
+          "/"
+        )
       );
+  }
 
-      return this.filteredQuotes = this.itemsRef
-        .snapshotChanges()
-        .pipe(
-          map(changes =>
-            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-          )
-        );
+  getQuotesByCategory(category: string) {
+    if (category === "all") {
+      this.quotesCollection = this.afs.collection<Quote>("quotes", ref =>
+        ref.orderBy("createdAt", "desc")
+      );
+      return (this.quotes = this.getData());
+    } else {
+      this.quotesCollection = this.afs.collection<Quote>("quotes", ref =>
+        ref.where("cat", "==", category)
+      );
+      return (this.quotes = this.getData());
     }
   }
 
-  deleteQuote(quoteId: string) {
-    this.itemsRef.remove(quoteId);
+  private getData() {
+    // .snapshotChanges() returns a DocumentChangeAction[], which contains
+    // a lot of information about "what happened" with each change. If you want to
+    // get the data and the id use the map operator.
+
+    return this.quotesCollection.snapshotChanges().pipe(
+      map(actions =>
+        actions.map(a => {
+          const data = a.payload.doc.data() as Quote;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      )
+    );
   }
 }

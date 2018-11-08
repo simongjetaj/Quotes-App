@@ -2,7 +2,7 @@
   quotes</h6>
 
 <div class="row" *ngIf="apiQuotes; else spinner">
-  <div class="col-lg-3 col-sm-6 mb-4" *ngFor="let apiQuote of apiQuotes; let i = index;" style="display: flex; flex-wrap: wrap;">
+  <div class="col-lg-3 col-sm-6 mb-4 quotes" *ngFor="let apiQuote of apiQuotes; let i = index;">
     <div class="lightGoldBackground card" [hidden]="!apiQuote.showApiQuote">
       <div class="
       card-body">
@@ -14,8 +14,8 @@
           <fa-icon [icon]="faEyeSlash"></fa-icon>
         </a>
         <small class="card-subtitle text-muted authorPosition">{{apiQuote.author}}</small>
-        <button type="button" (click)="addApiQuote(apiQuote)" class="btn text-dark saveBtnPosition">
-          <fa-icon [icon]="faPlusCircle"></fa-icon> Save
+        <button type="button" (click)="addApiQuote($event, apiQuote)" class="btn text-dark saveBtnPosition">
+          <fa-icon [icon]='faSave'></fa-icon> Save
         </button>
       </div>
     </div>
@@ -23,6 +23,7 @@
 </div>
 
 <ng-template #spinner>
-  <fa-icon [icon]="faAsterisk" [pulse]="true" size="3x" class="spinnerPosition"></fa-icon>
+  <fa-icon [icon]="
+            faAsterisk" [pulse]="true" size="3x" class="spinnerPosition"></fa-icon>
   <span class="sr-only">Loading...</span>
 </ng-template>

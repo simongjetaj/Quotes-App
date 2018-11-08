@@ -39,8 +39,7 @@ export class AddQuoteComponent implements OnInit {
         * I wanted to hide the form and this was the way to access the showAddQuoteForm property 
       */
       value.cat = value.cat.toLowerCase().trim();
-      value.createdAt = -+new Date(); // firebase needs the date in timestamp so we convert it in a short and a snazzy way
-      //console.log(value.createdAt);
+      value.createdAt = +new Date();
       this.quoteAdded.emit(value);
     }
   }

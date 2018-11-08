@@ -4,11 +4,11 @@ import { RouterModule, Routes } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { FlashMessagesModule } from "angular2-flash-messages";
 import { HttpModule } from "@angular/http";
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 // Angular Fire imports
 import { AngularFireModule } from "@angular/fire";
-import { AngularFireDatabase } from "@angular/fire/database";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { firebaseConfig } from "../environments/firebase.config";
 
 // Service imports
@@ -39,13 +39,14 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, "Quotes App"),
+    AngularFirestoreModule,
     FormsModule,
     FlashMessagesModule.forRoot(),
     HttpModule,
     FontAwesomeModule
   ],
-  providers: [AngularFireDatabase, QuoteService],
+  providers: [QuoteService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -34,6 +34,11 @@ body {
   background-color: var(--lightGray) !important;
 }
 
+.quotes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .footer {
   position: fixed;
   bottom: 0;

@@ -7,13 +7,11 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class ApiService {
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
 
   getApiQuotes() {
-    return this.http.get("https://talaikis.com/api/quotes/").pipe(
-      map(res => {
-        return res.json();
-      })
-    );
+    return this.http
+      .get("https://talaikis.com/api/quotes/")
+      .pipe(map(res => res.json()));
   }
 }
