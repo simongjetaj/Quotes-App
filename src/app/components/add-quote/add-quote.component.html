@@ -3,10 +3,10 @@
     <form novalidate #f="ngForm" (ngSubmit)="onAddQuote(f)">
       <div class="form-group">
         <label for="quote">Quote <span class="text-danger">*</span></label>
-        <textarea type="text" [(ngModel)]="quote.quote" id="category" name="quote" #quote="ngModel" minlength="10"
-          required class="form-control" id="quote" rows="3" placeholder="Enter quote" autofocus></textarea>
+        <textarea type="text" [(ngModel)]="quote.quote" id="category" name="quote" #quote="ngModel" minlength="15"
+          required class="form-control" id="quote" rows="3" placeholder="Enter quote"></textarea>
         <p *ngIf="quote.errors?.required && quote.touched" class="text-danger">Quote is required!</p>
-        <p *ngIf="quote.errors?.minlength && quote.touched" class="text-danger">Quote must be atleast 10
+        <p *ngIf="quote.errors?.minlength && quote.touched" class="text-danger">Quote must be atleast 15
           characters!</p>
       </div>
 

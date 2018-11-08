@@ -5,7 +5,8 @@ import {
   faQuoteLeft,
   faCopy,
   faAsterisk,
-  faTimesCircle
+  faTimesCircle,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
 import { QuoteService } from "../../services/quote.service";
@@ -27,7 +28,8 @@ export class QuotesComponent implements OnInit {
   faCopy = faCopy;
   faAsterisk = faAsterisk;
   faTimesCircle = faTimesCircle;
-
+  faSearch = faSearch;
+  
   constructor(
     private quoteService: QuoteService,
     private flashMsgService: FlashMsgService
