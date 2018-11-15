@@ -28,7 +28,7 @@ export class ApiQuotesComponent implements OnInit {
     private apiService: ApiService,
     public quoteService: QuoteService,
     private flashMsgService: FlashMsgService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.apiService.getApiQuotes().subscribe(
