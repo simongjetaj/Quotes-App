@@ -1,4 +1,4 @@
-# QuotesApp
+# Quotes App
 
 Besides Realtime Database 'Quotes App' is built with Cloud Firestore too (cloud-firestore branch).  The app is deployed with Firebase at https://quotes-app-9e259.firebaseapp.com/ (using Cloud Firestore settings)
 
