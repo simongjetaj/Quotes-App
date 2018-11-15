@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { FlashMessagesModule } from "angular2-flash-messages";
-import { HttpModule } from "@angular/http";
+import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 // Angular Fire imports
@@ -43,7 +43,7 @@ const appRoutes: Routes = [
     AngularFirestoreModule,
     FormsModule,
     FlashMessagesModule.forRoot(),
-    HttpModule,
+    HttpClientModule,
     FontAwesomeModule
   ],
   providers: [QuoteService],
