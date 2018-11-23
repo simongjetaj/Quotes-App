@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 
 import {
   faPlus,
@@ -6,7 +6,8 @@ import {
   faCopy,
   faAsterisk,
   faTimesCircle,
-  faSearch
+  faSearch,
+  faEdit
 } from "@fortawesome/free-solid-svg-icons";
 
 import { QuoteService } from "../../services/quote.service";
@@ -20,7 +21,10 @@ import { Quote } from "../../models/Quote";
 })
 export class QuotesComponent implements OnInit {
   quotes: Quote[];
+  quote: Quote;
   showAddQuoteForm: boolean = false;
+  errorMsgOnEditQuote: boolean = false;
+  @ViewChild('closeModalBtn') closeModalBtn: ElementRef;
 
   faPlus = faPlus;
   faQuoteLeft = faQuoteLeft;
@@ -28,11 +32,12 @@ export class QuotesComponent implements OnInit {
   faAsterisk = faAsterisk;
   faTimesCircle = faTimesCircle;
   faSearch = faSearch;
+  faEdit = faEdit;
 
   constructor(
     private quoteService: QuoteService,
     private flashMsgService: FlashMsgService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.quoteService
@@ -103,5 +108,19 @@ export class QuotesComponent implements OnInit {
     this.quoteService
       .getQuotesByCategory(cat)
       .subscribe(quotes => (this.quotes = quotes));
+  }
+
+  onEditQuote(quote: Quote) {
+    this.quote = quote;
+  }
+
+  editQuote(quote: Quote) {
+    if (!quote.quote || !quote.author || !quote.cat) {
+      this.errorMsgOnEditQuote = true;
+    } else {
+      this.quoteService.updateQuote(quote.id, quote);
+      const btnElement: HTMLElement = this.closeModalBtn.nativeElement as HTMLElement;
+      btnElement.click();
+    }
   }
 }

@@ -73,6 +73,25 @@ export class QuoteService {
       );
   }
 
+  updateQuote(quoteId: string, quote: Quote) {
+    this.quotesCollection.doc(quoteId).update(quote).then(() =>
+      this.flashMsgService.displayFlashMessage(
+        "Quote updated successfully!",
+        "alert alert-success text-center",
+        2000,
+        "/"
+      )
+    )
+      .catch(err =>
+        this.flashMsgService.displayFlashMessage(
+          err,
+          "alert alert-danger text-center",
+          3000,
+          "/"
+        )
+      );
+  }
+
   getQuotesByCategory(category: string) {
     if (category === "all") {
       this.quotesCollection = this.afs.collection<Quote>("quotes", ref =>

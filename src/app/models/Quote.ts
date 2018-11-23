@@ -1,5 +1,5 @@
 export interface Quote {
-  $id?: string;
+  id?: string;
   quote: string;
   author: string;
   cat: string;

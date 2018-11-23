@@ -1,11 +1,16 @@
 .copyCardIcon,
-.authorPosition {
+.authorPosition,
+.editQuoteIcon {
   position: absolute;
   bottom: 1rem;
 }
 
 .copyCardIcon {
   left: 1rem;
+}
+
+.editQuoteIcon {
+  left: 4rem;
 }
 
 .authorPosition {
