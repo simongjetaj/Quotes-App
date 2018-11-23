@@ -41,6 +41,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(firebaseConfig, "Quotes App"),
     AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     FormsModule,
     FlashMessagesModule.forRoot(),
     HttpClientModule,
@@ -49,4 +50,4 @@ const appRoutes: Routes = [
   providers: [QuoteService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
