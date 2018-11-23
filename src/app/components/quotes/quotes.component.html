@@ -37,10 +37,11 @@
               <a (click)='deleteQuote(quote.id)' class="deleteBtnPosition" title="Delete Quote">
                 <fa-icon [icon]="faTimesCircle"></fa-icon>
               </a>
-              <a (click)="copyQuote(quote.quote, quote.author)" class="btn lightBackground copyCardIcon" title="Copy to clipboard">
+              <button type="button" (click)="copyQuote(quote.quote, quote.author)" class="btn lightBackground copyCardIcon"
+                title="Copy to clipboard">
                 <fa-icon [icon]="faCopy"></fa-icon>
-              </a>
-              <button type="button" (click)="onEditQuote(quote)" class="btn lightGrayBackground editQuoteIcon"
+              </button>
+              <button type="button" (click)="onEditQuote(quote)" class="btn lightGrayBackground lightest editQuoteIcon"
                 data-toggle="modal" data-target=".edit-quote-modal-sm">
                 <fa-icon [icon]="faEdit"></fa-icon>
               </button>
@@ -74,23 +75,21 @@
         <form (submit)="editQuote(quote)">
           <div class="form-group">
             <label for="quote"><small>Quote <span class="text-danger">*</span></small></label>
-            <textarea type="text" [(ngModel)]="quote.quote" name="quote" minlength="15" required class="form-control"
-              id="quote" rows="3" placeholder="Edit quote">{{quote.quote}}</textarea>
+            <textarea type="text" #quoteInput minlength="15" required class="form-control" id="quote" rows="3"
+              placeholder="Edit quote">{{quote.quote}}</textarea>
           </div>
 
           <div class="form-group">
             <label for="author"><small>Author</small></label>
-            <input type="text" [(ngModel)]="quote.author" name="author" class="form-control" placeholder="Edit author"
-              [value]="quote.author">
+            <input type="text" #authorInput class="form-control" placeholder="Edit author" [value]="quote.author">
           </div>
 
           <div class="form-group">
             <label for="cat"><small>Category <span class="text-danger">*</span></small></label>
-            <input type="text" [(ngModel)]="quote.cat" name="cat" required class="form-control" placeholder="Edit category"
-              [value]="quote.cat">
+            <input type="text" #categoryInput required class="form-control" placeholder="Edit category" [value]="quote.cat">
           </div>
 
-          <button type="submit" class="btn mx-auto text-dark d-flex justify-content-center addBtn lightGoldBackground">Edit
+          <button type="submit" class="btn mx-auto text-dark d-flex justify-content-center lightGoldBackground">Edit
             Quote</button>
         </form>
       </div>

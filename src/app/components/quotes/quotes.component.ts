@@ -25,6 +25,9 @@ export class QuotesComponent implements OnInit {
   showAddQuoteForm: boolean = false;
   errorMsgOnEditQuote: boolean = false;
   @ViewChild('closeModalBtn') closeModalBtn: ElementRef;
+  @ViewChild('quoteInput') quoteInput: ElementRef;
+  @ViewChild('authorInput') authorInput: ElementRef;
+  @ViewChild('categoryInput') categoryInput: ElementRef;
 
   faPlus = faPlus;
   faQuoteLeft = faQuoteLeft;
@@ -115,12 +118,22 @@ export class QuotesComponent implements OnInit {
   }
 
   editQuote(quote: Quote) {
-    if (!quote.quote || !quote.author || !quote.cat) {
+    const quoteValue = this.quoteInput.nativeElement.value.trim();
+    const authorValue = this.authorInput.nativeElement.value.trim();
+    const categoryValue = this.categoryInput.nativeElement.value.trim();
+
+    if (!quoteValue || !authorValue || !categoryValue) {
       this.errorMsgOnEditQuote = true;
     } else {
+      // reinitialize quote object values with the updated values of DOM elements 
+      quote.quote = quoteValue;
+      quote.author = authorValue;
+      quote.cat = categoryValue;
+
       this.quoteService.updateQuote(quote.id, quote);
-      const btnElement: HTMLElement = this.closeModalBtn.nativeElement as HTMLElement;
-      btnElement.click();
+
+      // close modal
+      this.closeModalBtn.nativeElement.click();
     }
   }
 }
