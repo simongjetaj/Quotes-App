@@ -1,5 +1,11 @@
-<h6 class="text-center d-none d-lg-block text-muted mb-4">An extensive collection of random
-  quotes</h6>
+<h6 class="text-center d-none d-lg-block text-muted mb-4" *ngIf="apiQuotes">An extensive collection of random quotes</h6>
+
+<div class="alert alert-warning alert-dismissible fade show text-center" role="alert" *ngIf="apiErrorMsg">
+  <span>{{apiErrorMsg}}</span>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 
 <div class="row" *ngIf="apiQuotes; else spinner">
   <div class="col-lg-3 col-sm-6 mb-4 quotes" *ngFor="let apiQuote of apiQuotes; let i = index;">
@@ -22,7 +28,7 @@
   </div>
 </div>
 
-<ng-template #spinner>
+<ng-template #spinner *ngIf="!apiErrorMsg">
   <fa-icon [icon]="
             faAsterisk" [pulse]="true" size="3x" class="spinnerPosition"></fa-icon>
   <span class="sr-only">Loading...</span>

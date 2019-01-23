@@ -19,6 +19,7 @@ import { Quote } from "../../models/Quote";
 })
 export class ApiQuotesComponent implements OnInit {
   apiQuotes: Quote[];
+  apiErrorMsg: string;
 
   faAsterisk = faAsterisk;
   faEyeSlash = faEyeSlash;
@@ -29,7 +30,7 @@ export class ApiQuotesComponent implements OnInit {
     private apiService: ApiService,
     public quoteService: QuoteService,
     private flashMsgService: FlashMsgService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.apiService.getApiQuotes().subscribe(
@@ -42,9 +43,10 @@ export class ApiQuotesComponent implements OnInit {
           "An error occurred, please try again later!",
           "alert alert-danger text-danger",
           4000,
-          "/"
+          "/api"
         )
     );
+    this.apiErrorMsg = "API is not accessible anymore, sorry! But, you can still take a look at the code until I found a workround...";
   }
 
   addApiQuote(event, quote: Quote) {
