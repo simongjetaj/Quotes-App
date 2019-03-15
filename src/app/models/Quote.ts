@@ -4,5 +4,4 @@ export interface Quote {
   author: string;
   cat: string;
   createdAt: number;
-  showApiQuote?: boolean;
 }

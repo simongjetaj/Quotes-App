@@ -7,7 +7,8 @@ import {
   faAsterisk,
   faTimesCircle,
   faSearch,
-  faEdit
+  faEdit,
+  faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 import { QuoteService } from "../../services/quote.service";
@@ -24,6 +25,7 @@ export class QuotesComponent implements OnInit {
   quote: Quote;
   showAddQuoteForm: boolean = false;
   errorMsgOnEditQuote: boolean = false;
+  loading: boolean = false;
   @ViewChild('closeModalBtn') closeModalBtn: ElementRef;
   @ViewChild('quoteInput') quoteInput: ElementRef;
   @ViewChild('authorInput') authorInput: ElementRef;
@@ -36,17 +38,22 @@ export class QuotesComponent implements OnInit {
   faTimesCircle = faTimesCircle;
   faSearch = faSearch;
   faEdit = faEdit;
-
+  faInfoCircle = faInfoCircle;
+  
   constructor(
     private quoteService: QuoteService,
     private flashMsgService: FlashMsgService
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.quoteService
       .getQuotes()
-      .subscribe(
-        quotes => (this.quotes = quotes),
+      .subscribe(quotes => 
+        {
+          this.quotes = quotes;
+          this.loading = false;
+        },
         err =>
           this.flashMsgService.displayFlashMessage(
             `${err}`,

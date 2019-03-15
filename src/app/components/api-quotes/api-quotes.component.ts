@@ -11,6 +11,7 @@ import { QuoteService } from "../../services/quote.service";
 import { FlashMsgService } from "../../services/flash-msg.service";
 
 import { Quote } from "../../models/Quote";
+import { ApiQuote } from "../../models/ApiQuote";
 
 @Component({
   selector: "app-api-quotes",
@@ -18,8 +19,13 @@ import { Quote } from "../../models/Quote";
   styleUrls: ["./api-quotes.component.css"]
 })
 export class ApiQuotesComponent implements OnInit {
-  apiQuotes: Quote[];
-  apiErrorMsg: string;
+  apiQuotes: ApiQuote[];
+  quote: Quote = {
+    quote: "",
+    author: "",
+    cat: "",
+    createdAt: 0
+  };
 
   faAsterisk = faAsterisk;
   faEyeSlash = faEyeSlash;
@@ -35,7 +41,7 @@ export class ApiQuotesComponent implements OnInit {
   ngOnInit() {
     this.apiService.getApiQuotes().subscribe(
       apiQuotes => {
-        apiQuotes.map(q => (q.showApiQuote = true));
+        apiQuotes.map(q => q.showApiQuote = true);
         this.apiQuotes = apiQuotes;
       },
       () =>
@@ -46,14 +52,17 @@ export class ApiQuotesComponent implements OnInit {
           "/api"
         )
     );
-    this.apiErrorMsg = "API is not accessible anymore, sorry! But, you can still take a look at the code until I found a workround...";
   }
 
-  addApiQuote(event, quote: Quote) {
+  addApiQuote(event, quote: ApiQuote) {
     event.srcElement.innerHTML = "Saving...";
     event.target.classList.add("lightBackground");
-    quote.createdAt = +new Date();
-    this.quoteService.newQuote(quote);
+
+    this.quote.quote = quote.content;
+    this.quote.author = quote.title;
+    this.quote.cat = 'API';
+    this.quote.createdAt = +new Date();
+    this.quoteService.newQuote(this.quote);
   }
 
   hideApiQuote(apiQuote) {

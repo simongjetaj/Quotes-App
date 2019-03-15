@@ -24,14 +24,14 @@
       </div>
     </div>
 
-    <div *ngIf="quotes; else spinner">
+    <div *ngIf="quotes && quotes.length > 0 && loading == false; else noQuotes">
       <div class="row">
         <div class="col-lg-3 col-sm-6 mb-3 quotes" *ngFor="let quote of quotes">
           <div class="lightGoldBackground card">
             <div class="card-body">
-              <p class="card-text pb-5">
-                <fa-icon [icon]="faQuoteLeft"></fa-icon> {{quote.quote}}
-              </p>
+              <div class="card-text pb-5" [innerHtml]="quote.quote">
+                <!-- <fa-icon [icon]="faQuoteLeft"></fa-icon> -->
+              </div>
               <small class="card-subtitle text-muted authorPosition">&mdash; {{quote.author}}</small>
 
               <a (click)='deleteQuote(quote.id)' class="deleteBtnPosition" title="Delete Quote">
@@ -51,10 +51,23 @@
       </div>
     </div>
 
-    <ng-template #spinner>
+    <ng-template #noQuotes>
+      <ng-container *ngIf="!quotes?.length > 0 && loading == false">
+        <div class="col-sm-6 mx-auto mt-4 alert alert-warning alert-dismissible fade show" role="alert">
+          <span>
+            <fa-icon [icon]="faInfoCircle"></fa-icon> Sorry, we did not found any quotes!
+          </span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </ng-container>
+    </ng-template>
+
+    <span *ngIf="loading">
       <fa-icon [icon]="faAsterisk" [pulse]="true" size="3x" class="spinnerPosition"></fa-icon>
       <span class="sr-only">Loading...</span>
-    </ng-template>
+    </span>
   </div>
 </div>
 
@@ -76,7 +89,7 @@
           <div class="form-group">
             <label for="quote"><small>Quote <span class="text-danger">*</span></small></label>
             <textarea type="text" #quoteInput minlength="15" required class="form-control" id="quote" rows="3"
-              placeholder="Edit quote">{{quote.quote}}</textarea>
+              placeholder="Edit quote" [innerHtml]="quote.quote"></textarea>
           </div>
 
           <div class="form-group">
