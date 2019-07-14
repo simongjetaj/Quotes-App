@@ -26,10 +26,10 @@ export class QuotesComponent implements OnInit {
   showAddQuoteForm: boolean = false;
   errorMsgOnEditQuote: boolean = false;
   loading: boolean = false;
-  @ViewChild('closeModalBtn') closeModalBtn: ElementRef;
-  @ViewChild('quoteInput') quoteInput: ElementRef;
-  @ViewChild('authorInput') authorInput: ElementRef;
-  @ViewChild('categoryInput') categoryInput: ElementRef;
+  @ViewChild('closeModalBtn', { static: false }) closeModalBtn: ElementRef;
+  @ViewChild('quoteInput', { static: false }) quoteInput: ElementRef;
+  @ViewChild('authorInput', { static: false }) authorInput: ElementRef;
+  @ViewChild('categoryInput', { static: false }) categoryInput: ElementRef;
 
   faPlus = faPlus;
   faQuoteLeft = faQuoteLeft;
@@ -39,7 +39,7 @@ export class QuotesComponent implements OnInit {
   faSearch = faSearch;
   faEdit = faEdit;
   faInfoCircle = faInfoCircle;
-  
+
   constructor(
     private quoteService: QuoteService,
     private flashMsgService: FlashMsgService
@@ -49,7 +49,7 @@ export class QuotesComponent implements OnInit {
     this.loading = true;
     this.quoteService
       .getQuotes()
-      .subscribe(quotes => 
+      .subscribe(quotes =>
         {
           this.quotes = quotes;
           this.loading = false;
@@ -132,7 +132,7 @@ export class QuotesComponent implements OnInit {
     if (!quoteValue || !authorValue || !categoryValue) {
       this.errorMsgOnEditQuote = true;
     } else {
-      // reinitialize quote object values with the updated values of DOM elements 
+      // reinitialize quote object values with the updated values of DOM elements
       quote.quote = quoteValue;
       quote.author = authorValue;
       quote.cat = categoryValue;
