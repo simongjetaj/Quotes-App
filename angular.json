@@ -52,8 +52,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "quotes-app:build",
-            "proxyConfig": "proxy.conf.json"
+            "browserTarget": "quotes-app:build"
           },
           "configurations": {
             "production": {

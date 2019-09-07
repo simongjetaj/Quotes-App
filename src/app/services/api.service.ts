@@ -12,8 +12,12 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getApiQuotes() {
-    return this.http.get<ApiQuote[]>('/quotes').pipe(
-      retry(3) // retry a failed request up to 3 times
-    );
+    return this.http
+      .get<ApiQuote[]>(
+        'https://quotesondesign.com/wp-json/wp/v2/posts?filter[orderby]=rand&filter[posts_per_page]=30'
+      )
+      .pipe(
+        retry(3) // retry a failed request up to 3 times
+      );
   }
 }

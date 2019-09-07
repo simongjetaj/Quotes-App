@@ -41,7 +41,6 @@ export class ApiQuotesComponent implements OnInit {
   ngOnInit() {
     this.apiService.getApiQuotes().subscribe(
       apiQuotes => {
-        console.log(apiQuotes);
         apiQuotes.map(q => (q.showApiQuote = true));
         this.apiQuotes = apiQuotes;
       },
