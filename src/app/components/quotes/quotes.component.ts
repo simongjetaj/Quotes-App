@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import {
   faPlus,
@@ -9,16 +9,16 @@ import {
   faSearch,
   faEdit,
   faInfoCircle
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
-import { QuoteService } from "../../services/quote.service";
-import { FlashMsgService } from "../../services/flash-msg.service";
-import { Quote } from "../../models/Quote";
+import { QuoteService } from '../../services/quote.service';
+import { FlashMsgService } from '../../services/flash-msg.service';
+import { Quote } from '../../models/Quote';
 
 @Component({
-  selector: "app-quotes",
-  templateUrl: "./quotes.component.html",
-  styleUrls: ["./quotes.component.css"]
+  selector: 'app-quotes',
+  templateUrl: './quotes.component.html',
+  styleUrls: ['./quotes.component.css']
 })
 export class QuotesComponent implements OnInit {
   quotes: Quote[];
@@ -43,30 +43,28 @@ export class QuotesComponent implements OnInit {
   constructor(
     private quoteService: QuoteService,
     private flashMsgService: FlashMsgService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.quoteService
-      .getQuotes()
-      .subscribe(quotes =>
-        {
-          this.quotes = quotes;
-          this.loading = false;
-        },
-        err =>
-          this.flashMsgService.displayFlashMessage(
-            `${err}`,
-            "alert alert-danger text-danger",
-            4000,
-            "/"
-          )
-      );
+    this.quoteService.getQuotes().subscribe(
+      quotes => {
+        this.quotes = quotes;
+        this.loading = false;
+      },
+      err =>
+        this.flashMsgService.displayFlashMessage(
+          `${err}`,
+          'alert alert-danger text-danger',
+          4000,
+          '/'
+        )
+    );
   }
 
   addQuote(quote: Quote) {
     if (!quote.author) {
-      quote.author = "Unknown";
+      quote.author = 'Unknown';
     }
     this.quoteService.newQuote(quote);
     this.showAddQuoteForm = false;
@@ -81,22 +79,22 @@ export class QuotesComponent implements OnInit {
   }
 
   copyQuote(quote: string, author: string) {
-    let selBox = document.createElement("textarea");
-    selBox.style.position = "fixed";
-    selBox.style.left = "0";
-    selBox.style.top = "0";
-    selBox.style.opacity = "0";
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
     selBox.value = `"${quote}" \n\n(Author: ${author})`;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(selBox);
     this.flashMsgService.displayFlashMessage(
-      "Quote copied successfully!",
-      "alert alert-success text-center",
+      'Quote copied successfully!',
+      'alert alert-success text-center',
       2000,
-      "/"
+      '/'
     );
   }
 
@@ -104,7 +102,7 @@ export class QuotesComponent implements OnInit {
     searchedText = searchedText.toLowerCase().trim();
 
     if (!searchedText) {
-      this.changeCategory("all");
+      this.changeCategory('all');
     } else {
       this.quotes = this.quotes.filter(
         (q: Quote) =>

@@ -1,0 +1,7 @@
+{
+  "/quotes": {
+    "target": "https://quotesondesign.com/wp-json/wp/v2/posts?filter[orderby]=rand&filter[posts_per_page]=30",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

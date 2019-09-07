@@ -1,19 +1,38 @@
-<h6 class="text-center d-none d-lg-block text-muted mb-4" *ngIf="apiQuotes">An extensive collection of random quotes</h6>
+<h6 class="text-center d-none d-lg-block text-muted mb-4" *ngIf="apiQuotes">
+  An extensive collection of random quotes
+</h6>
 
 <div class="row" *ngIf="apiQuotes; else spinner">
-  <div class="col-lg-3 col-sm-6 mb-4 quotes" *ngFor="let apiQuote of apiQuotes; let i = index;">
+  <div
+    class="col-lg-3 col-sm-6 mb-4 quotes"
+    *ngFor="let apiQuote of apiQuotes; let i = index"
+  >
     <div class="lightGoldBackground card" [hidden]="!apiQuote.showApiQuote">
-      <div class="
-      card-body">
-        <div class="card-text pb-5" [innerHTML]="apiQuote.content">
-        </div>
+      <div
+        class="
+      card-body"
+      >
+        <div
+          class="card-text pb-5"
+          [innerHTML]="apiQuote.content.rendered"
+        ></div>
 
-        <a (click)='hideApiQuote(apiQuote)' class="deleteBtnPosition" title="Hide Api Quote">
+        <a
+          (click)="hideApiQuote(apiQuote)"
+          class="deleteBtnPosition"
+          title="Hide Api Quote"
+        >
           <fa-icon [icon]="faEyeSlash"></fa-icon>
         </a>
-        <small class="card-subtitle text-muted authorPosition">&mdash; {{apiQuote.title}}</small>
-        <button type="button" (click)="addApiQuote($event, apiQuote)" class="btn lightGrayBackground text-dark saveBtnPosition">
-          <fa-icon [icon]='faSave'></fa-icon> Save
+        <small class="card-subtitle text-muted authorPosition"
+          >&mdash; {{ apiQuote.title.rendered }}</small
+        >
+        <button
+          type="button"
+          (click)="addApiQuote($event, apiQuote)"
+          class="btn lightGrayBackground text-dark saveBtnPosition"
+        >
+          <fa-icon [icon]="faSave"></fa-icon> Save
         </button>
       </div>
     </div>
@@ -21,7 +40,11 @@
 </div>
 
 <ng-template #spinner>
-  <fa-icon [icon]="
-            faAsterisk" [pulse]="true" size="3x" class="spinnerPosition"></fa-icon>
+  <fa-icon
+    [icon]="faAsterisk"
+    [pulse]="true"
+    size="3x"
+    class="spinnerPosition"
+  ></fa-icon>
   <span class="sr-only">Loading...</span>
 </ng-template>

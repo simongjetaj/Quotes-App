@@ -1,19 +1,19 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { retry } from 'rxjs/operators';
 
-import { ApiQuote } from "../models/ApiQuote";
+import { ApiQuote } from '../models/ApiQuote';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ApiService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getApiQuotes() {
-    return this.http.get<ApiQuote[]>("https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=30").pipe(
-      retry(3), // retry a failed request up to 3 times
+    return this.http.get<ApiQuote[]>('/quotes').pipe(
+      retry(3) // retry a failed request up to 3 times
     );
   }
 }
