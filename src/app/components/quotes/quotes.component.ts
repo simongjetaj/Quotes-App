@@ -23,9 +23,9 @@ import { Quote } from '../../models/Quote';
 export class QuotesComponent implements OnInit {
   quotes: Quote[];
   quote: Quote;
-  showAddQuoteForm: boolean = false;
-  errorMsgOnEditQuote: boolean = false;
-  loading: boolean = false;
+  showAddQuoteForm = false;
+  errorMsgOnEditQuote = false;
+  loading = false;
   @ViewChild('closeModalBtn', { static: false }) closeModalBtn: ElementRef;
   @ViewChild('quoteInput', { static: false }) quoteInput: ElementRef;
   @ViewChild('authorInput', { static: false }) authorInput: ElementRef;
@@ -79,7 +79,7 @@ export class QuotesComponent implements OnInit {
   }
 
   copyQuote(quote: string, author: string) {
-    let selBox = document.createElement('textarea');
+    const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
     selBox.style.top = '0';
@@ -140,5 +140,11 @@ export class QuotesComponent implements OnInit {
       // close modal
       this.closeModalBtn.nativeElement.click();
     }
+  }
+
+  stripHtml(html: string) {
+    const temporalDivElement = document.createElement('div');
+    temporalDivElement.innerHTML = html;
+    return temporalDivElement.textContent ?? temporalDivElement.innerText ?? '';
   }
 }

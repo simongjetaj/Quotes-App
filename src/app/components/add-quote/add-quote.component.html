@@ -3,26 +3,62 @@
     <form novalidate #f="ngForm" (ngSubmit)="onAddQuote(f)">
       <div class="form-group">
         <label for="quote">Quote <span class="text-danger">*</span></label>
-        <textarea type="text" [(ngModel)]="quote.quote" id="quote" name="quote" #quote="ngModel" minlength="15"
-          required class="form-control" id="quote" rows="3" placeholder="Enter quote"></textarea>
-        <p *ngIf="quote.errors?.required && quote.touched" class="text-danger">Quote is required!</p>
-        <p *ngIf="quote.errors?.minlength && quote.touched" class="text-danger">Quote must be atleast 15
-          characters!</p>
+        <textarea
+          type="text"
+          [(ngModel)]="quote.quote"
+          id="quote"
+          name="quote"
+          #quote="ngModel"
+          minlength="15"
+          required
+          class="form-control"
+          id="quote"
+          rows="3"
+          placeholder="Enter quote"
+        ></textarea>
+        <p *ngIf="quote.errors?.required && quote.touched" class="text-danger">
+          Quote is required!
+        </p>
+        <p *ngIf="quote.errors?.minlength && quote.touched" class="text-danger">
+          Quote must be atleast 15 characters!
+        </p>
       </div>
 
       <div class="form-group">
         <label for="author">Author</label>
-        <input type="text" [(ngModel)]="quote.author" name="author" id="author" class="form-control" placeholder="Enter author">
+        <input
+          type="text"
+          [(ngModel)]="quote.author"
+          name="author"
+          id="author"
+          class="form-control"
+          placeholder="Enter author"
+        />
       </div>
 
       <div class="form-group">
         <label for="cat">Category <span class="text-danger">*</span></label>
-        <input type="text" [(ngModel)]="quote.cat" name="cat" id="cat" #cat="ngModel" required class="form-control"
-          placeholder="Enter category">
-        <p *ngIf="cat.errors?.required && cat.touched" class="text-danger">Category is required!</p>
+        <input
+          type="text"
+          [(ngModel)]="quote.cat"
+          name="cat"
+          id="cat"
+          #cat="ngModel"
+          required
+          class="form-control"
+          placeholder="Enter category"
+        />
+        <p *ngIf="cat.errors?.required && cat.touched" class="text-danger">
+          Category is required!
+        </p>
       </div>
 
-      <button type="submit" class="btn text-light d-flex justify-content-center addBtn darkBlueBackground">Add Quote</button>
+      <button
+        type="submit"
+        class="btn text-light d-flex justify-content-center addBtn darkBlueBackground"
+      >
+        Add Quote
+      </button>
     </form>
   </div>
 </div>

@@ -7,10 +7,17 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class FlashMsgService {
+  constructor(
+    public flashMessagesService: FlashMessagesService,
+    public router: Router
+  ) {}
 
-  constructor(public flashMessagesService: FlashMessagesService, public router: Router) { }
-
-  displayFlashMessage(message: string, cssClass: string, timeout: number, navigateTo: string) {
+  displayFlashMessage(
+    message: string,
+    cssClass: string,
+    timeout: number,
+    navigateTo: string
+  ) {
     this.flashMessagesService.show(message, { cssClass, timeout });
     this.router.navigate([navigateTo]);
   }

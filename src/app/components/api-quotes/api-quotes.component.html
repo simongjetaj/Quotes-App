@@ -8,10 +8,7 @@
     *ngFor="let apiQuote of apiQuotes; let i = index"
   >
     <div class="lightGoldBackground card" [hidden]="!apiQuote.showApiQuote">
-      <div
-        class="
-      card-body"
-      >
+      <div class="card-body">
         <div
           class="card-text pb-5"
           [innerHTML]="apiQuote.content.rendered"

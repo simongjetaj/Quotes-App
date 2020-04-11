@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Quote } from "../../models/Quote";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Quote } from '../../models/Quote';
 
 @Component({
-  selector: "app-sidebar",
-  templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.css"]
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
   @Input()
@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   @Output()
   categoryChanged = new EventEmitter<string>();
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.categories = Array.from(new Set(this.quotes.map(c => c.cat)));

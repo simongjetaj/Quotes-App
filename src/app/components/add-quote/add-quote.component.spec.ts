@@ -8,9 +8,8 @@ describe('AddQuoteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddQuoteComponent ]
-    })
-    .compileComponents();
+      declarations: [AddQuoteComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -18,8 +17,4 @@ describe('AddQuoteComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
 });

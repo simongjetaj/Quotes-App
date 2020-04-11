@@ -88,8 +88,8 @@
         <form (submit)="editQuote(quote)">
           <div class="form-group">
             <label for="quote"><small>Quote <span class="text-danger">*</span></small></label>
-            <textarea type="text" #quoteInput minlength="15" required class="form-control" id="quote" rows="3"
-              placeholder="Edit quote" [innerHtml]="quote.quote"></textarea>
+            <textarea type="text" #quoteInput minlength="15" required class="form-control" id="quote" rows="6"
+              placeholder="Edit quote" [innerHtml]="stripHtml(quote.quote)"></textarea>
           </div>
 
           <div class="form-group">
