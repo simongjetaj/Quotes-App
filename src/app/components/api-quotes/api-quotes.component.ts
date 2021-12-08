@@ -21,7 +21,7 @@ import { ApiQuote } from '../../models/ApiQuote';
 export class ApiQuotesComponent implements OnInit {
   apiQuotes: ApiQuote[];
   quote: Quote = {
-    quote: '',
+    text: '',
     author: '',
     cat: '',
     createdAt: 0
@@ -58,7 +58,7 @@ export class ApiQuotesComponent implements OnInit {
     event.srcElement.innerHTML = 'Saving...';
     event.target.classList.add('lightBackground');
 
-    this.quote.quote = quote.content['rendered'];
+    this.quote.text = quote.content['rendered'];
     this.quote.author = quote.title['rendered'];
     this.quote.cat = 'API';
     this.quote.createdAt = +new Date();

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 import {
   faPlus,
@@ -27,9 +28,6 @@ export class QuotesComponent implements OnInit {
   errorMsgOnEditQuote = false;
   loading = false;
   @ViewChild('closeModalBtn', { static: false }) closeModalBtn: ElementRef;
-  @ViewChild('quoteInput', { static: false }) quoteInput: ElementRef;
-  @ViewChild('authorInput', { static: false }) authorInput: ElementRef;
-  @ViewChild('categoryInput', { static: false }) categoryInput: ElementRef;
 
   faPlus = faPlus;
   faQuoteLeft = faQuoteLeft;
@@ -41,37 +39,40 @@ export class QuotesComponent implements OnInit {
   faInfoCircle = faInfoCircle;
 
   constructor(
+    private ref: ChangeDetectorRef,
+
     private quoteService: QuoteService,
     private flashMsgService: FlashMsgService
   ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.quoteService.getQuotes().subscribe(
-      quotes => {
+    this.quoteService.getQuotes().subscribe({
+      next: quotes => {
         this.quotes = quotes;
         this.loading = false;
       },
-      err =>
+      error: (err) =>
         this.flashMsgService.displayFlashMessage(
           `${err}`,
           'alert alert-danger text-danger',
           4000,
           '/'
         )
-    );
+      })
   }
 
   addQuote(quote: Quote) {
     if (!quote.author) {
       quote.author = 'Unknown';
     }
+
     this.quoteService.newQuote(quote);
     this.showAddQuoteForm = false;
   }
 
-  deleteQuote(quoteId: string) {
-    this.quoteService.deleteQuote(quoteId);
+  deleteQuote(quote: Quote) {
+    this.quoteService.deleteQuote(quote.id);
   }
 
   toggleAddQuoteForm() {
@@ -88,7 +89,7 @@ export class QuotesComponent implements OnInit {
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
-    document.execCommand('copy');
+    navigator.clipboard.writeText(selBox.value);
     document.body.removeChild(selBox);
     this.flashMsgService.displayFlashMessage(
       'Quote copied successfully!',
@@ -106,32 +107,30 @@ export class QuotesComponent implements OnInit {
     } else {
       this.quotes = this.quotes.filter(
         (q: Quote) =>
-          q.quote.toLowerCase().includes(searchedText) ||
+          q.text.toLowerCase().includes(searchedText) ||
           q.author.toLowerCase().includes(searchedText)
       );
     }
   }
 
-  changeCategory(cat) {
+  changeCategory(cat: string) {
     this.quoteService
       .getQuotesByCategory(cat)
-      .subscribe(quotes => (this.quotes = quotes));
+      .subscribe({
+        next: quotes => this.quotes = quotes
+      });
   }
 
   onEditQuote(quote: Quote) {
     this.quote = quote;
   }
 
-  editQuote(quote: Quote) {
-    const quoteValue = this.quoteInput.nativeElement.value.trim();
-    const authorValue = this.authorInput.nativeElement.value.trim();
-    const categoryValue = this.categoryInput.nativeElement.value.trim();
-
-    if (!quoteValue || !authorValue || !categoryValue) {
+  editQuote(quote: Quote, textValue: string, authorValue: string, categoryValue: string) {
+    if (!textValue || !authorValue || !categoryValue) {
       this.errorMsgOnEditQuote = true;
     } else {
       // reinitialize quote object values with the updated values of DOM elements
-      quote.quote = quoteValue;
+      quote.text = textValue;
       quote.author = authorValue;
       quote.cat = categoryValue;
 
@@ -145,6 +144,7 @@ export class QuotesComponent implements OnInit {
   stripHtml(html: string) {
     const temporalDivElement = document.createElement('div');
     temporalDivElement.innerHTML = html;
+
     return temporalDivElement.textContent ?? temporalDivElement.innerText ?? '';
   }
 }

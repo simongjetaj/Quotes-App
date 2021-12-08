@@ -1,6 +1,10 @@
 <div class="row">
   <div class="col-lg-2 d-none d-lg-block">
-    <app-sidebar *ngIf="quotes" [quotes]="quotes" (categoryChanged)="changeCategory($event)"></app-sidebar>
+    <app-sidebar
+      *ngIf="quotes"
+      [quotes]="quotes"
+      (categoryChanged)="changeCategory($event)">
+    </app-sidebar>
   </div>
 
   <div class="col-lg-10">
@@ -29,22 +33,20 @@
         <div class="col-lg-3 col-sm-6 mb-3 quotes" *ngFor="let quote of quotes">
           <div class="lightGoldBackground card">
             <div class="card-body">
-              <div class="card-text pb-5" [innerHtml]="quote.quote">
-                <!-- <fa-icon [icon]="faQuoteLeft"></fa-icon> -->
+              <div class="card-text pb-5" [innerHtml]="quote.text">
               </div>
-              <small class="card-subtitle text-muted authorPosition">&mdash; {{quote.author}}</small>
-
-              <a (click)='deleteQuote(quote.id)' class="deleteBtnPosition" title="Delete Quote">
+              <a (click)='deleteQuote(quote)' class="deleteBtnPosition" title="Delete Quote">
                 <fa-icon [icon]="faTimesCircle"></fa-icon>
               </a>
-              <button type="button" (click)="copyQuote(quote.quote, quote.author)" class="btn lightBackground copyCardIcon"
-                title="Copy to clipboard">
-                <fa-icon [icon]="faCopy"></fa-icon>
-              </button>
-              <button type="button" (click)="onEditQuote(quote)" class="btn lightGrayBackground lightest editQuoteIcon"
-                data-toggle="modal" data-target=".edit-quote-modal-sm">
-                <fa-icon [icon]="faEdit"></fa-icon>
-              </button>
+                <button type="button" (click)="copyQuote(quote.text, quote.author)" class="btn lightBackground"
+                  title="Copy to clipboard">
+                  <fa-icon [icon]="faCopy"></fa-icon>
+                </button>
+                <button (click)="onEditQuote(quote)" type="button" class="btn lightGrayBackground" data-bs-toggle="modal" data-bs-target="#editModalToggle">
+                  <fa-icon [icon]="faEdit"></fa-icon>
+
+                  <small class="card-subtitle text-muted authorPosition">&mdash; {{quote.author}}</small>
+                </button>
             </div>
           </div>
         </div>
@@ -57,9 +59,7 @@
           <span>
             <fa-icon [icon]="faInfoCircle"></fa-icon> Sorry, we did not found any quotes!
           </span>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       </ng-container>
     </ng-template>
@@ -71,42 +71,40 @@
   </div>
 </div>
 
-<div class="modal fade edit-quote-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+
+<div class="modal fade edit-quote-modal-sm" id="editModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Edit Quote</h5>
-        <button type="button" #closeModalBtn class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button #closeModalBtn type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div *ngIf="quote" class="modal-body">
         <div [hidden]="!errorMsgOnEditQuote" class="alert alert-danger text-center" role="alert">
           <small>Please, fill in all fields!</small>
         </div>
-        <form (submit)="editQuote(quote)">
+        <form (submit)="editQuote(quote, textInput.value, authorInput.value, categoryInput.value)">
           <div class="form-group">
-            <label for="quote"><small>Quote <span class="text-danger">*</span></small></label>
-            <textarea type="text" #quoteInput minlength="15" required class="form-control" id="quote" rows="6"
-              placeholder="Edit quote" [innerHtml]="stripHtml(quote.quote)"></textarea>
+            <label for="text" class="mb-1"><small>Quote <span class="text-danger">*</span></small></label>
+            <textarea type="text" #textInput minlength="15" required class="form-control mb-2" id="text" rows="6"
+              placeholder="Edit quote" [innerHtml]="stripHtml(quote.text)"></textarea>
           </div>
 
-          <div class="form-group">
-            <label for="author"><small>Author</small></label>
+          <div class="form-group mb-2">
+            <label for="author" class="mb-1"><small>Author</small></label>
             <input type="text" #authorInput class="form-control" placeholder="Edit author" [value]="quote.author">
           </div>
 
           <div class="form-group">
-            <label for="cat"><small>Category <span class="text-danger">*</span></small></label>
+            <label for="cat" class="mb-1"><small>Category <span class="text-danger">*</span></small></label>
             <input type="text" #categoryInput required class="form-control" placeholder="Edit category" [value]="quote.cat">
           </div>
 
-          <button type="submit" class="btn mx-auto text-dark d-flex justify-content-center lightGoldBackground">Edit
-            Quote</button>
+          <button type="submit" class="mt-3 btn mx-auto text-dark d-flex justify-content-center lightGoldBackground">Save Changes
+          </button>
         </form>
       </div>
-
     </div>
   </div>
 </div>

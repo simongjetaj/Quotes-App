@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import {
   AngularFirestore,
   AngularFirestoreCollection
-} from "@angular/fire/firestore";
+} from "@angular/fire/compat/firestore";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
@@ -100,7 +100,7 @@ export class QuoteService {
       return (this.quotes = this.getData());
     } else {
       this.quotesCollection = this.afs.collection<Quote>("quotes", ref =>
-        ref.where("cat", "==", category)
+        ref.orderBy("createdAt", "desc").where("cat", "==", category)
       );
       return (this.quotes = this.getData());
     }

@@ -14,7 +14,7 @@ export class AddQuoteComponent implements OnInit {
   quoteAdded = new EventEmitter<Quote>();
 
   quote: Quote = {
-    quote: '',
+    text: '',
     author: '',
     cat: '',
     createdAt: 0
@@ -25,6 +25,8 @@ export class AddQuoteComponent implements OnInit {
   ngOnInit() {}
 
   onAddQuote({ value, valid }: { value: Quote; valid: boolean }) {
+    console.log(value);
+    
     if (!valid) {
       this.flashMsgService.displayFlashMessage(
         'Please, fill in all fields!',
