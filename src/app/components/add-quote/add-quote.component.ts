@@ -25,8 +25,6 @@ export class AddQuoteComponent implements OnInit {
   ngOnInit() {}
 
   onAddQuote({ value, valid }: { value: Quote; valid: boolean }) {
-    console.log(value);
-    
     if (!valid) {
       this.flashMsgService.displayFlashMessage(
         'Please, fill in all fields!',

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { Quote } from '../../models/Quote';
 
 @Component({
@@ -6,7 +6,7 @@ import { Quote } from '../../models/Quote';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnChanges {
   @Input()
   quotes: Quote[];
   categories: string[];
@@ -16,8 +16,12 @@ export class SidebarComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.categories = [...new Set(this.quotes.map(c => c.cat))];
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
     this.categories = Array.from(
-      new Set(this.quotes.map(c => c.cat))
+      new Set(changes.quotes.currentValue.map((q: Quote) => q.cat))
     );
   }
 

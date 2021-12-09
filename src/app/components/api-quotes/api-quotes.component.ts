@@ -39,19 +39,19 @@ export class ApiQuotesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.apiService.getApiQuotes().subscribe(
-      apiQuotes => {
+    this.apiService.getApiQuotes().subscribe({
+      next: apiQuotes => {
         apiQuotes.map(q => (q.showApiQuote = true));
         this.apiQuotes = apiQuotes;
       },
-      () =>
+      error: () =>
         this.flashMsgService.displayFlashMessage(
           'An error occurred, please try again later!',
           'alert alert-danger text-danger',
           4000,
           '/api'
         )
-    );
+    });
   }
 
   addApiQuote(event, quote: ApiQuote) {
@@ -65,7 +65,7 @@ export class ApiQuotesComponent implements OnInit {
     this.quoteService.newQuote(this.quote);
   }
 
-  hideApiQuote(apiQuote) {
+  hideApiQuote(apiQuote: ApiQuote) {
     apiQuote.showApiQuote = false;
   }
 }

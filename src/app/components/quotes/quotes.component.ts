@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
 
 import {
   faPlus,
@@ -39,8 +38,6 @@ export class QuotesComponent implements OnInit {
   faInfoCircle = faInfoCircle;
 
   constructor(
-    private ref: ChangeDetectorRef,
-
     private quoteService: QuoteService,
     private flashMsgService: FlashMsgService
   ) {}
@@ -129,6 +126,7 @@ export class QuotesComponent implements OnInit {
     if (!textValue || !authorValue || !categoryValue) {
       this.errorMsgOnEditQuote = true;
     } else {
+      this.errorMsgOnEditQuote = false;
       // reinitialize quote object values with the updated values of DOM elements
       quote.text = textValue;
       quote.author = authorValue;

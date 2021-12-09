@@ -6,6 +6,10 @@ body {
   font-family: "Roboto", sans-serif !important;
 }
 
+.card {
+  min-width: 15rem !important;
+}
+
 :root {
   --darkBlue: #026670;
   --lightBlue: #9fedd7;
